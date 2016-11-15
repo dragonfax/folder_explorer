@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/therecipe/qt/core"
@@ -26,8 +25,6 @@ func InitDelegate() *HTMLDelegate {
 
 func paint(painter *gui.QPainter, option *widgets.QStyleOptionViewItem, index *core.QModelIndex) {
 
-	fmt.Printf("started painting index %d\n", index.Row())
-
 	options := widgets.NewQStyleOptionViewItem2(option)
 	htmlDelegate.InitStyleOption(options, index)
 
@@ -45,24 +42,20 @@ func paint(painter *gui.QPainter, option *widgets.QStyleOptionViewItem, index *c
 	doc.DrawContents(painter, clip)
 
 	painter.Restore()
-
-	fmt.Printf("drew '%s'\n", text)
 }
 
 func sizeHint(option *widgets.QStyleOptionViewItem, index *core.QModelIndex) *core.QSize {
-	fmt.Println("started sizing")
 
 	options := widgets.NewQStyleOptionViewItem2(option)
 	htmlDelegate.InitStyleOption(options, index)
 
-	var doc gui.QTextDocument
+	doc := gui.NewQTextDocument(nil)
 	doc.SetHtml(options.Text())
 	doc.SetTextWidth(float64(options.Rect().Width()))
 
 	w := int(doc.IdealWidth())
 	h := int(doc.Size().Height())
 
-	fmt.Println("finished sizing")
 	return core.NewQSize2(w, h)
 }
 
