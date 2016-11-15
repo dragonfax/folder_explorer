@@ -74,6 +74,8 @@ func main() {
 	htmlDelegate = InitDelegate()
 	list.SetModel(listModel)
 	list.SetItemDelegate(htmlDelegate)
+	list.SetSpacing(5)
+	list.SetStyleSheet("QListView::item { border-bottom: 1px solid black; }")
 	bgWindow.SetWidget(list)
 
 	// child folder window
