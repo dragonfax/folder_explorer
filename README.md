@@ -1,3 +1,4 @@
+Experimental simple filesystem exploration UI.
 
   qtdeploy build desktop ./
 
